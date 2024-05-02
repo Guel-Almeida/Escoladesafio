@@ -20,3 +20,16 @@ jobs:
           port: "65002"
           source: "."
           target: "/desafio"
+
+      - name: "build app"
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: "45.84.207.76"
+          username: "u654904186"
+          password: ${{ secrets.PASSWORD }}
+          port: "65002"
+          script: |
+            cd /desafio
+            composer install --no-dev --no-progress -a
+            php artisan optimize
+            chown -R www-data:www-data .
