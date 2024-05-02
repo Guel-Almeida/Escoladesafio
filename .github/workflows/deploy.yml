@@ -1,0 +1,22 @@
+name: "deploy"
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: "Baixar o código"
+        uses: actions/checkout@v4
+
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: "45.84.207.76"
+          username: "u654904186"
+          password: ${{ secrets.PASSWORD }}
+          port: "65002"
+          source: "."
+          target: "/desafio"
