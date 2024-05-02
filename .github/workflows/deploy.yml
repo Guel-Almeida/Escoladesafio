@@ -15,7 +15,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: "45.84.207.76"
-          username: "u654904186"
+          username: "root"
           password: ${{ secrets.PASSWORD }}
           port: "65002"
           source: "."
