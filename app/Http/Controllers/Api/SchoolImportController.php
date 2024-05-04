@@ -22,10 +22,17 @@ class SchoolImportController extends Controller
         }
 
         $file = $request->file('file');
+        try {
+            Excel::import(new SchoolsImport, $file);
+            return response()->json(['status'=>'Success','message'=>'File imported successfully'],Response::HTTP_OK);
 
-        Excel::import(new SchoolsImport, $file);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['status'=>'Error','message'=>'Ocurring Error'],Response::HTTP_BAD_REQUEST);
 
-        return response()->json(['status'=>'Success','message'=>'File imported successfully'],Response::HTTP_OK);
+        }
+
+
 
     }
 }
